@@ -6,7 +6,7 @@
 /*   By: ghenriqu <ghenriqu@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 16:59:11 by ghenriqu          #+#    #+#             */
-/*   Updated: 2025/10/19 19:31:12 by ghenriqu         ###   ########.fr       */
+/*   Updated: 2025/10/25 16:29:06 by ghenriqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ ___
 
 Write the following function:
 
-int    picoshell(char *cmds[]);
+int    picoshell(char **cmds[]);
 
 The goal of this function is to execute a pipeline. It must execute each
 commands [sic] of cmds and connect the output of one to the input of the
@@ -59,7 +59,7 @@ int	picoshell(char **cmds[])
 		if (cmds[i + 1])
 		{
 			if (pipe(fd) == -1)
-				return (-1);
+				return (1);
 		}
 		else
 		{
@@ -67,7 +67,50 @@ int	picoshell(char **cmds[])
 			fd[1] = -1;
 		}
 		pid = fork();
-
-		
+		if (pid < 0)
+		{
+			if (fd[0] != -1)
+				close(fd[0]);
+			if (fd[1] != -1)
+				close(fd[1]);
+			if (in_fd != 0)
+				close(in_fd);
+			return (1);
+		}
+		if (pid == 0)
+		{
+			if (in_fd != 0)
+			{
+				if (dup2(in_fd, 0) == -1)
+					exit(1);
+				close(in_fd);
+			}
+			if (fd[1] != -1)
+			{
+				if (dup2(fd[1], 1) == -1)
+					exit(1);
+				close(fd[1]);
+				close(fd[0]);
+			}
+			execvp(cmds[i][0], cmds[i]);
+			exit(1);
+		}
+		else
+		{
+			if (in_fd != 0)
+				close(in_fd);
+			if (fd[1] != -1)
+				close(fd[1]);
+			in_fd = fd[0];
+			i++;
+		}
 	}
+	while (wait(&status) > 0)
+	{
+		if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
+			ret = 1;
+		else if (!WIFEXITED(status))
+			ret = 1;
+	}
+	return (ret);
 }
