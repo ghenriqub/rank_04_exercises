@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   3.c                                                :+:      :+:    :+:   */
+/*   4.c                                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ghenriqu <ghenriqu@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/26 13:19:51 by ghenriqu          #+#    #+#             */
-/*   Updated: 2025/10/26 13:56:48 by ghenriqu         ###   ########.fr       */
+/*   Created: 2025/10/26 13:57:04 by ghenriqu          #+#    #+#             */
+/*   Updated: 2025/10/26 14:08:21 by ghenriqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	picoshell(char **cmds[])
 			if (fd[1] != -1)
 			{
 				if (dup2(fd[1], 1) == -1)
-					exit (1);
+					exit (-1);
 				close (fd[1]);
 				close (fd[0]);
 			}
@@ -78,7 +78,7 @@ int	picoshell(char **cmds[])
 			i++;
 		}
 	}
-	while (wait(&status) > 0)
+	while(wait(&status) > 0)
 	{
 		if (!WIFEXITED(status) || WEXITSTATUS(status) != 0)
 			ret = 1;

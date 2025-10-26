@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   3.c                                                :+:      :+:    :+:   */
+/*   5.c                                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ghenriqu <ghenriqu@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/26 13:19:51 by ghenriqu          #+#    #+#             */
-/*   Updated: 2025/10/26 13:56:48 by ghenriqu         ###   ########.fr       */
+/*   Created: 2025/10/26 14:08:59 by ghenriqu          #+#    #+#             */
+/*   Updated: 2025/10/26 14:17:36 by ghenriqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ int	picoshell(char **cmds[])
 					close (in);
 				return (1);
 			}
-		}
-		else
-		{
-			fd[0] = -1;
-			fd[1] = -1;
+			else
+			{
+				fd[0] == -1;
+				fd[1] == -1;
+			}
 		}
 		pid = fork();
 		if (pid < 0)
@@ -56,12 +56,12 @@ int	picoshell(char **cmds[])
 			{
 				if (dup2(in, 0) == -1)
 					exit (1);
-				close (in);
+				close(in);
 			}
 			if (fd[1] != -1)
 			{
 				if (dup2(fd[1], 1) == -1)
-					exit (1);
+					exit(1);
 				close (fd[1]);
 				close (fd[0]);
 			}
@@ -80,7 +80,7 @@ int	picoshell(char **cmds[])
 	}
 	while (wait(&status) > 0)
 	{
-		if (!WIFEXITED(status) || WEXITSTATUS(status) != 0)
+		if (!WIFEXITED(status) || !WEXITSTATUS(status) != 0)
 			ret = 1;
 	}
 	return (ret);
