@@ -6,7 +6,7 @@
 /*   By: ghenriqu <ghenriqu@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/26 12:21:08 by ghenriqu          #+#    #+#             */
-/*   Updated: 2025/10/26 12:28:28 by ghenriqu         ###   ########.fr       */
+/*   Updated: 2025/10/26 14:28:22 by ghenriqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ int	ft_popen(const char *file, char const *argv[], int type)
 	{
 		if (type == 'r')
 		{
-			if (dup2(fd[1], STDOUT_FILENO) < 0)
+			if (dup2(fd[1], 1) < 0)
 				exit (-1);
 		}
 		else
 		{
-			if (dup2(fd[0], STDIN_FILENO) < 0)
+			if (dup2(fd[0], 0) < 0)
 				exit (-1);
 		}
 		close (fd[0]);

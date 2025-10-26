@@ -6,7 +6,7 @@
 /*   By: ghenriqu <ghenriqu@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/26 14:19:17 by ghenriqu          #+#    #+#             */
-/*   Updated: 2025/10/26 14:20:05 by ghenriqu         ###   ########.fr       */
+/*   Updated: 2025/10/26 14:22:25 by ghenriqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void    unexpected(char c)
     if (c)
         printf("Unexpected token '%c'\n", c);
     else
-        printf("Unexpected end of file\n");
+        printf("Unexpected end of input\n");
 }
 
 int accept(char **s, char c)
