@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vbc.c                                              :+:      :+:    :+:   */
+/*   1.c                                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ghenriqu <ghenriqu@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 16:34:33 by ghenriqu          #+#    #+#             */
-/*   Updated: 2025/10/25 17:01:54 by ghenriqu         ###   ########.fr       */
+/*   Updated: 2025/11/01 13:23:56 by ghenriqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ static node	*parse_term(char **s)
 			destroy_tree(left);
 			return (NULL);
 		}
-		node	n = { .type = MULTI, .l = left, .r = right};
+		node	n = { .type = MULTI, .l = left, .r = right };
 		left = new_node(n);
 		if (!left)
 			return (NULL);
