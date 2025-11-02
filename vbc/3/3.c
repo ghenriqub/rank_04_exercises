@@ -17,7 +17,7 @@ typedef struct node {
 
 node    *new_node(node n)
 {
-    node *ret = calloc(1, sizeof(n));
+    node *ret = calloc(1, sizeof(*ret));
     if (!ret)
         return (NULL);
     *ret = n;
@@ -41,12 +41,12 @@ void    unexpected(char c)
     if (c)
         printf("Unexpected token '%c'\n", c);
     else
-        printf("Unexpected end of file\n");
+        printf("Unexpected end of input\n");
 }
 
 int accept(char **s, char c)
 {
-    if (**s)
+    if (**s == c)
     {
         (*s)++;
         return (1);
@@ -66,10 +66,14 @@ int expect(char **s, char c)
 
 node    *parse_expr(char *s)
 {
-    //...
+    char    *p = s;
+    node    *ret = parse_expr_r(&p);
 
-    if (*s) 
+    if (!ret)
+        return (NULL);
+    if (*p)
     {
+        unexpected(*p);
         destroy_tree(ret);
         return (NULL);
     }
@@ -87,6 +91,7 @@ int eval_tree(node *tree)
         case VAL:
             return (tree->val);
     }
+    return (0);
 }
 
 int main(int argc, char **argv)
@@ -98,4 +103,5 @@ int main(int argc, char **argv)
         return (1);
     printf("%d\n", eval_tree(tree));
     destroy_tree(tree);
+    return (0);
 }
