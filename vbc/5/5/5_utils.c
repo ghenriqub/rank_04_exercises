@@ -1,22 +1,18 @@
 
-static node *parse_factor(char **s);
-static node *parse_term(char **s);
-static node *parse_expr_r(char **s);
-
 static node *parse_factor(char **s)
 {
-    if (isdigit(unsigned char )**s)
+    if (isdigit((unsigned char)**s))
     {
         node    n = { .type = VAL, .val = **s, .l = NULL, .r = NULL };
         (*s)++;
-        return (new_node(n));
+        return(new_node(n));
     }
     if (accept(s, '('))
     {
-        node    *e = parse_expr_r(s);
+        node *e = parse_expr_r(s);
         if (!e)
             return (NULL);
-        if (!expect(s, ')'))
+        if (!expected(s, ')'))
         {
             destroy_tree(e);
             return (NULL);
@@ -24,7 +20,7 @@ static node *parse_factor(char **s)
         return (e);
     }
     unexpected(**s);
-    return (NULL);
+    return(NULL);
 }
 
 static node *parse_term(char **s)
@@ -49,7 +45,7 @@ static node *parse_term(char **s)
     return (left);
 }
 
-static node *parse_expr_r(char **s)
+static char *parse_expr_r(char **s)
 {
     node    *left = parse_term(s);
 
