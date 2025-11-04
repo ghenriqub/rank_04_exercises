@@ -1,6 +1,0 @@
-src = https://github.com/Lastftw/42-Exam-rank-4/
-
-make sure we've done:
-  picoshell
-  ft_pop
-  vbc

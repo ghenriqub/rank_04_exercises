@@ -9,7 +9,7 @@ int ft_popen(char const *file, const char *argv[], int type)
 
     if (!file || !argv || (type != 'r' && type != 'w'))
         return (-1);
-    if (pipe(fd) < 0)
+    if (pipe(fd))
         return (-1);
     pid = fork();
     if (pid < 0)
@@ -28,7 +28,7 @@ int ft_popen(char const *file, const char *argv[], int type)
         else
         {
             if (dup2(fd[0], 0) < 0)
-                exit (-1);
+                exit (1);
         }
         close (fd[0]);
         close (fd[1]);

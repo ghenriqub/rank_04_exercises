@@ -54,7 +54,7 @@ int picoshell(char **cmds[])
                 close (fd[0]);
             }
             execvp(cmds[i][0], cmds[i]);
-            exit (1);
+            exit(1);
         }
         else
         {
@@ -63,7 +63,7 @@ int picoshell(char **cmds[])
             if (fd[1] != -1)
                 close (fd[1]);
             in = fd[0];
-            i++;    
+            i++;
         }
     }
     while (wait(&status) > 0)
