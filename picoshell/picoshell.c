@@ -10,7 +10,7 @@ int picoshell(char **cmds[])
     int     in = -1;
     int     ret = 0;
     int     status;
-
+    
     while (cmds[i])
     {
         if (cmds[i + 1])
@@ -35,7 +35,7 @@ int picoshell(char **cmds[])
             if (fd[1] != -1)
                 close (fd[1]);
             if (fd[0] != -1)
-                close (fd[0]);
+                close (fd[1]);
             return (1);
         }
         if (pid == 0)

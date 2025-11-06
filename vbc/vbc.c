@@ -70,7 +70,7 @@ static node *parse_factor(char **s)
 {
     if (isdigit((unsigned char)**s))
     {
-        node    n = { .type = VAL, .val = **s, .l = NULL, .r = NULL };
+        node    n = { .type = VAL, .val = **s - '0', .l = NULL, .r = NULL };
         (*s)++;
         return (new_node(n));
     }
@@ -96,17 +96,17 @@ static node *parse_term(char **s)
 
     if (!left)
         return (NULL);
-    while(accept(s, '*'))
+    while (accept(s, '*'))
     {
         node    *right = parse_factor(s);
-        if (!right)
+        if(!right)
         {
             destroy_tree(left);
             return (NULL);
         }
         node    n = { .type = MULTI, .l = left, .r = right };
         left = new_node(n);
-        if (!left)
+        if(!left)
             return (NULL);
     }
     return (left);
@@ -121,14 +121,14 @@ static node *parse_expr_r(char **s)
     while (accept(s, '+'))
     {
         node    *right = parse_term(s);
-        if (!right)
+        if(!right)
         {
             destroy_tree(left);
             return (NULL);
         }
         node    n = { .type = ADD, .l = left, .r = right };
         left = new_node(n);
-        if (!left)
+        if(!left)
             return (NULL);
     }
     return (left);
@@ -141,7 +141,7 @@ node    *parse_expr(char *s)
 
     if (!ret)
         return (NULL);
-    if (*p)
+    if (*p) 
     {
         unexpected(*p);
         destroy_tree(ret);
